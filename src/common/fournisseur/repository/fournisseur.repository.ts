@@ -11,6 +11,7 @@ export class FournisseurRepository implements FournisseurRepository {
     private readonly fournisseurModel: Model<any>,
   ) {}
 
+  
   async findAll(dto: PaginationResponseDto): Promise<any> {
     return this.fournisseurModel.find(dto);
   }

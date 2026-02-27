@@ -13,6 +13,7 @@ export class CreateFournisseurHandler implements ICommandHandler<CreateFournisse
     ) {}
 
 
+    
     async execute(command: CreateFournisseurCommand): Promise<Fournisseur> {
         const { designation } = command;
         if (!designation) {
