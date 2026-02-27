@@ -4,7 +4,7 @@ import { BullModule } from '@nestjs/bull';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule} from '@nestjs/mongoose';
-import { FournisseurModule } from './common/fournisseur/fournisseur_module';
+import { FournisseurModule } from './common/fournisseur/fournisseur.module';
 import { CommandBus, CqrsModule, QueryBus } from '@nestjs/cqrs';
 
 @Module({

@@ -1,6 +1,6 @@
 import { Post, Body, Controller, Query, Get } from "@nestjs/common";
 import { createFournisseurDto } from "src/common/fournisseur/dto/create.dto";
-import { CreateFournisseurCommand } from "./commands/create-fournisseur.command";
+import { CreateFournisseurCommand } from "./commands/create.fournisseur.command";
 import { ApiProperty } from "@nestjs/swagger";
 import { PaginationResponseDto } from "./dto/paginationResponse.dto";
 import { CommandBus, QueryBus } from '@nestjs/cqrs';

@@ -3,6 +3,7 @@ import { Inject } from '@nestjs/common';
 import { GetAllFournisseurQuery } from '../queries/getAll.query';
 import { FournisseurRepository } from '../repository/fournisseur.repository';
 
+
 @QueryHandler(GetAllFournisseurQuery) 
 export class GetAllFournisseurHandler
   implements IQueryHandler<GetAllFournisseurQuery>
