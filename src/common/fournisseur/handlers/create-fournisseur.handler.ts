@@ -12,7 +12,7 @@ export class CreateFournisseurHandler implements ICommandHandler<CreateFournisse
         @InjectModel(Fournisseur.name) private fournisseurModel: Model<FournisseurDocument>,
     ) {}
 
-    
+
     async execute(command: CreateFournisseurCommand): Promise<Fournisseur> {
         const { designation } = command;
         if (!designation) {
