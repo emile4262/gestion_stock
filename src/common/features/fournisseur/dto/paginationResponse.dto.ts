@@ -4,11 +4,13 @@ import { IsOptional } from 'class-validator';
 export class PaginationResponseDto {
  
 
-  @ApiProperty({ description: 'Page actuelle' })
-  page: string;
+  @IsOptional()
+  @ApiPropertyOptional({ description: 'Page actuelle' })
+  page?: string;
 
-  @ApiProperty({ description: 'Limite par page' })
-  limit: string;
+  @IsOptional()
+  @ApiPropertyOptional({ description: 'Limite par page' })
+  limit?: string;
 
   @IsOptional()
     @ApiPropertyOptional({
