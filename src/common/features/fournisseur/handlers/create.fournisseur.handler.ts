@@ -3,9 +3,7 @@ import {
   Injectable,
   Inject,
 } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
 import { CreateFournisseurCommand } from '../commands/create.fournisseur.command';
-import { InterfaceFournisseur } from '../repository/interface.fournisseur';
 import { FournisseurRepository } from '../repository/fournisseur.repository';
 import { Fournisseur } from 'src/common/schemas/fournisseur';
 

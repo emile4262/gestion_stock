@@ -15,23 +15,31 @@ export class FournisseurRepository implements InterfaceFournisseur {
     private readonly fournisseurModel: Model<any>,
   ) {}
 
+   async create(dto: createFournisseurDto): Promise<Fournisseur> {
+    const verification = await this.fournisseurModel.findOne(dto);
+    if (verification) {
+      throw new BadRequestException('Un fournisseur avec cette designation existe déjà.');
+    }
+     const creat = await this.fournisseurModel.create(dto);
+     return creat;
+  
+    
+  }
+
   async findAllByFournisseur(
     dto: PaginationResponseDto,
   ): Promise<PaginationService<Fournisseur>>{
-    const { search, page, limit, dateCreationDebut, dateCreationFin } =
-          dto;
-    const query: any = { deletedAt: null };
+    const { search, page, limit, dateCreationDebut, dateCreationFin } = dto;
+    const query: any = {};
 
-    // Valeurs par défaut et conversion
     const Page = page ? parseInt(String(page), 10) : 1;
     const Limit = limit ? parseInt(String(limit), 10) : 10;
 
     if (search) {
       query.designation = { $regex: search, $options: 'i' };
     }
-
-    // Filtres de date
-    if (dateCreationDebut !== undefined && dateCreationFin !== undefined) {
+    // Filtres de date - corrigé pour fonctionner individuellement
+    if (dateCreationDebut || dateCreationFin) {
       query.createdAt = {};
       if (dateCreationDebut) {
         query.createdAt.$gte = new Date(dateCreationDebut);
@@ -49,24 +57,10 @@ export class FournisseurRepository implements InterfaceFournisseur {
       .skip((Page - 1) * Limit)
       .limit(Limit)
       .exec();
-      
+            
     const total = await this.fournisseurModel.countDocuments(query);
-
     return new PaginationService<Fournisseur>(data, Page, Limit, total);
-
   } 
-  
-
-  async create(dto: createFournisseurDto): Promise<Fournisseur> {
-    const verification = await this.fournisseurModel.findOne(dto);
-    if (verification) {
-      throw new BadRequestException('Un fournisseur avec cette designation existe déjà.');
-    }
-     const creat = await this.fournisseurModel.create(dto);
-     return creat;
-  
-    
-  }
 
   async findById(id: string): Promise<Fournisseur> {
     const foursseurId = await this.fournisseurModel.findById(id);
