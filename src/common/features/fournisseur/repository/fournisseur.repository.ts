@@ -40,15 +40,15 @@ export class FournisseurRepository implements InterfaceFournisseur {
     }
     // Filtres de date - corrigé pour fonctionner individuellement
     if (dateCreationDebut || dateCreationFin) {
-      query.createdAt = {};
-      if (dateCreationDebut) {
-        query.createdAt.$gte = new Date(dateCreationDebut);
-      }
-      if (dateCreationFin) {
-        const endDate = new Date(dateCreationFin);
-        endDate.setHours(23, 59, 59, 999);
-        query.createdAt.$lte = endDate;
-      }
+      // query.createdAt = {};
+      // if (dateCreationDebut) {
+      //   query.createdAt.$gte = new Date(dateCreationDebut);
+      // }
+      // if (dateCreationFin) {
+      //   const endDate = new Date(dateCreationFin);
+      //   endDate.setHours(23, 59, 59, 999);
+      //   query.createdAt.$lte = endDate;
+      // }
     }
 
     const data = await this.fournisseurModel
@@ -63,11 +63,11 @@ export class FournisseurRepository implements InterfaceFournisseur {
   } 
 
   async findById(id: string): Promise<Fournisseur> {
-    const foursseurId = await this.fournisseurModel.findById(id);
-    if (!foursseurId) {
-      throw new BadRequestException('Fournisseur non trouvé.');
+    const fournisseur = await this.fournisseurModel.findById(id);
+    if (!fournisseur) {
+      throw new NotFoundException('Fournisseur non trouvé.');
     }
-    return foursseurId;
+    return fournisseur;
   }
 
   async countDocuments(): Promise<number> {

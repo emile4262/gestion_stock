@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { MongooseModule} from '@nestjs/mongoose';
 import { FournisseurModule } from './common/features/fournisseur/fournisseur.module';
 import { CommandBus, CqrsModule, QueryBus } from '@nestjs/cqrs';
+import { CategorieModule } from './common/features/categorie/categorie.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { CommandBus, CqrsModule, QueryBus } from '@nestjs/cqrs';
     }),
     CqrsModule,
     FournisseurModule,
+    CategorieModule,
     BullModule.forRootAsync({
       imports: [
         ConfigModule,

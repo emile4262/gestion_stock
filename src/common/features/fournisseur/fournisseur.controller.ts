@@ -9,6 +9,7 @@ import { FournisseurRepository } from "./repository/fournisseur.repository";
 import { UpdateFournisseurDto } from "./dto/updatedFournisseur";
 import { UpdateFournisseurCommand } from "./commands/update.fournisseur.command";
 import { DeleteFournisseurCommand } from "./commands/delete.fournisseur.command";
+import { GetOneFournisseurQuery } from "./queries/getOne.query";
 
 @Controller('fournisseur')
 export class FournisseurController {
@@ -35,6 +36,14 @@ export class FournisseurController {
         dto.search
       ));
   }
+
+   @Get('id')
+    @ApiProperty({description: 'Récupérer une fournisseur spécifique'})
+    findOne(@Param('id') id: string){
+      return this.queryBus.execute(new GetOneFournisseurQuery(
+          id
+      ))
+    }
 
   @Put('id')
   @ApiProperty({ description: 'modifier tous fournisseur'})
