@@ -1,8 +1,8 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, ApiResponse } from "@nestjs/swagger";
 
 
 export class createFournisseurDto {
 
-  @ApiProperty({ description: 'La designation du fournisseur' })  
+  @ApiProperty({ description: 'La designation du fournisseur' }) 
   designation: string;
 }

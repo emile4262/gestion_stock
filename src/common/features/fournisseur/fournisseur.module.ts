@@ -9,6 +9,7 @@ import { UpdateFournisseurHandler } from './handlers/update.fournisseur.handler'
 import { DeleteFournisseurHandler } from './handlers/delete.fournisseur.handler';
 import { ConfigModule } from '@nestjs/config';
 import { FournisseurRepository } from './repository/fournisseur.repository';
+import { GetOneFournisseurQuery } from './queries/getOne.query';
 
 
 const CommandHandlers = [
@@ -17,7 +18,7 @@ const CommandHandlers = [
   DeleteFournisseurHandler,
 ];
 
-const QueryHandlers = [GetAllFournisseurHandler];
+const QueryHandlers = [GetAllFournisseurHandler, GetOneFournisseurQuery ];
 
 @Module({
   imports: [

@@ -14,6 +14,6 @@ export class UpdateFournisseurHandler implements ICommandHandler<UpdateFournisse
   ) {}
 
   async execute(command: UpdateFournisseurCommand): Promise<any> {
-    return this.fournisseurRepository.update(command.id, command.data);
+    return this.fournisseurRepository.updateFournisseur(command.id, command.data);
   }
 }

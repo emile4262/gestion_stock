@@ -74,7 +74,7 @@ export class FournisseurRepository implements InterfaceFournisseur {
     return this.fournisseurModel.countDocuments();
   }
 
-  async update(id: string, updated: UpdateFournisseurDto): Promise<Fournisseur> {
+  async updateFournisseur(id: string, updated: UpdateFournisseurDto): Promise<Fournisseur> {
   const fournisseur = await this.fournisseurModel.findByIdAndUpdate(
     id,
     { $set: { ...updated, updatedAt: new Date() } },

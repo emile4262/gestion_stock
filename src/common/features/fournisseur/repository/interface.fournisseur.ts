@@ -11,7 +11,7 @@ export interface InterfaceFournisseur {
         
     findById(id: string): Promise<Fournisseur>;
 
-    update(id: string, updateFournisseurDto: UpdateFournisseurDto): Promise<Fournisseur>,
+    updateFournisseur(id: string, updateFournisseurDto: UpdateFournisseurDto): Promise<Fournisseur>,
 
     deleteFournisseur(id: string): Promise<Fournisseur>
     
