@@ -11,14 +11,18 @@ import { ConfigModule } from '@nestjs/config';
 import { FournisseurRepository } from './repository/fournisseur.repository';
 import { GetOneFournisseurHandler } from './handlers/findOne.fournisseur.handler';
 
-
 const CommandHandlers = [
   CreateFournisseurHandler,
   UpdateFournisseurHandler,
   DeleteFournisseurHandler,
+  
 ];
 
-const QueryHandlers = [GetAllFournisseurHandler, GetOneFournisseurHandler ];
+const QueryHandlers = [
+  GetAllFournisseurHandler, 
+  GetOneFournisseurHandler,
+  
+];
 
 @Module({
   imports: [

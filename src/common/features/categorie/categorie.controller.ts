@@ -27,28 +27,32 @@ export class CategorieController {
 
   @Get('Categories')
   @ApiProperty({ description: 'Récupérer tous les Categories' })
-  getAll(@Query() dto: PaginationResponseDto) {
+  getAll(@Query()
+   dto: PaginationResponseDto,
+   @Query('fournisseurId') fournisseurId: string,
+  ) {
       return this.queryBus.execute(new GetAllCategorieQuery(
         dto.page,
         dto.limit,
+        fournisseurId,
         dto.dateCreationDebut,
         dto.dateCreationFin,
         dto.search
       ));
   }
 
-  @Get('id')
+  @Get(':categorieId')
   @ApiProperty({description: 'Récupérer une catégorie spécifique'})
-  findOne(@Param('id') id: string){
+  findOne(@Param('categorieId') id: string){
     return this.queryBus.execute(new GetOneCategorieQuery(
         id
     ))
   }
 
-  @Put('id')
+  @Put(':categorieId')
   @ApiProperty({ description: 'modifier tous Categorie'})
    async update(
-    @Param('id') id: string,
+    @Param('categorieId') id: string,
     @Body() data: UpdateCategorieDto,
   ) {
     const result = await this.commandBus.execute(

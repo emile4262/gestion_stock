@@ -5,11 +5,11 @@ import { createCategorieDto } from "../dto/CreateCategorie.dto";
 import { UpdateCategorieDto } from "../dto/updatedCategorie.dto";
 
 export interface InterfaceCategorie {
-    findAllByCategorie(dto: PaginationResponseDto): Promise<PaginationService<Categorie>>;
+    findAllByCategorie(dto: PaginationResponseDto, fournisseurId: string): Promise<PaginationService<Categorie>>;
     
     create(dto: createCategorieDto): Promise<Categorie>;
         
-    findById(id: string): Promise<Categorie>;
+    findOne(id: string): Promise<Categorie>;
 
     updateCategorie(id: string, updateCategorieDto: UpdateCategorieDto): Promise<Categorie>,
 

@@ -8,8 +8,8 @@ export interface InterfaceFournisseur {
     findAllByFournisseur(dto: PaginationResponseDto): Promise<PaginationService<Fournisseur>>;
     
     create(dto: createFournisseurDto): Promise<Fournisseur>;
-        
-    findById(id: string): Promise<Fournisseur>;
+    
+    findOne(id: string): Promise<Fournisseur>;
 
     updateFournisseur(id: string, updateFournisseurDto: UpdateFournisseurDto): Promise<Fournisseur>,
 

@@ -14,6 +14,6 @@ export class GetOneCategorieHandler implements IQueryHandler<GetOneCategorieQuer
     ){}
 
     async execute(query: GetOneCategorieQuery): Promise<Categorie> {
-        return await this.CategorieRepository.findById(query.id);
+        return await this.CategorieRepository.findOne(query.id);
     }
 }

@@ -7,7 +7,7 @@ import { CreateCategorieHandler } from './handlers/create.categorie.handler';
 import { UpdateCategorieHandler } from './handlers/update.categorie.handler';
 import { DeleteCategorieHandler } from './handlers/delete.categorie.handlers';
 import { GetAllCategorieHandler } from './handlers/findAll.handlers';
-import { GetOneCategorieQuery } from './queries/getOne.query';
+import { GetOneCategorieHandler } from './handlers/findOne.handlers';
 import { CategorieController } from './categorie.controller';
 import { categorieRepository } from './repository/categorie.repository';
 
@@ -18,7 +18,7 @@ const CommandHandlers = [
   DeleteCategorieHandler,
 ];
 
-const QueryHandlers = [GetAllCategorieHandler, GetOneCategorieQuery ];
+const QueryHandlers = [GetAllCategorieHandler, GetOneCategorieHandler ];
 
 @Module({
   imports: [

@@ -62,13 +62,13 @@ export class FournisseurRepository implements InterfaceFournisseur {
     return new PaginationService<Fournisseur>(data, Page, Limit, total);
   } 
 
-  async findById(id: string): Promise<Fournisseur> {
-    const fournisseur = await this.fournisseurModel.findById(id);
-    if (!fournisseur) {
-      throw new NotFoundException('Fournisseur non trouvé.');
-    }
-    return fournisseur;
-  }
+ async findOne(id: string): Promise<Fournisseur> {
+     const fournisseur = await this.fournisseurModel.findById(id).exec();
+     if (!fournisseur) {
+       throw new NotFoundException('Fournisseur non trouvé');
+     }
+     return fournisseur;
+   }
 
   async countDocuments(): Promise<number> {
     return this.fournisseurModel.countDocuments();

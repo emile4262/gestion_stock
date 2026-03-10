@@ -37,18 +37,19 @@ export class FournisseurController {
       ));
   }
 
-   @Get('id')
+   @Get(':fournisseurId')
     @ApiProperty({description: 'Récupérer une fournisseur spécifique'})
-    findOne(@Param('id') id: string){
+    findOne(@Param('fournisseurId') id: string){
+      console.log('ID fournisseur reçu:', id); // Debug
       return this.queryBus.execute(new GetOneFournisseurQuery(
           id
       ))
     }
 
-  @Put('id')
+  @Put(':fournisseurId')
   @ApiProperty({ description: 'modifier tous fournisseur'})
    async update(
-    @Param('id') id: string,
+    @Param('fournisseurId') id: string,
     @Body() data: UpdateFournisseurDto,
   ) {
     const result = await this.commandBus.execute(
@@ -61,10 +62,10 @@ export class FournisseurController {
     };
   }
 
-  @Delete(':id')
+  @Delete(':fournisseurId')
   @ApiProperty({ description: 'supprimer tous fournisseur'})
   async delete(
-    @Param('id') id: string,
+    @Param('fournisseurId') id: string,
   ) {
     const result = await this.commandBus.execute(
       new DeleteFournisseurCommand(id),
@@ -75,7 +76,6 @@ export class FournisseurController {
       data: result,
     };
   }
-
 
 
 }

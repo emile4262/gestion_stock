@@ -14,6 +14,6 @@ export class GetOneFournisseurHandler implements IQueryHandler<GetOneFournisseur
     ){}
 
     async execute(query: GetOneFournisseurQuery): Promise<Fournisseur> {
-        return await this.fournisseurRepository.findById(query.id);
+        return await this.fournisseurRepository.findOne(query.id);
     }
 }

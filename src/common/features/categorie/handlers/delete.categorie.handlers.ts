@@ -3,7 +3,6 @@ import { Injectable } from '@nestjs/common';
 import { Inject } from '@nestjs/common';
 import { DeleteCategorieCommand } from '../commands/delete.categorie.command';
 import { Categorie } from 'src/common/schemas/categorie';
-import { InterfaceCategorie } from '../repository/interface.categorie';
 import { categorieRepository } from '../repository/categorie.repository';
 
 @CommandHandler(DeleteCategorieCommand)

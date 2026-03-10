@@ -21,6 +21,12 @@ async create(dto: createCategorieDto): Promise<Categorie> {
     if (verification) {
       throw new BadRequestException('le nom de la categorie existe déjà.');
     }
+
+    const fournisseur = await this.categorieModel.findById(dto.fournisseurId);
+    if (!fournisseur) {
+      throw new BadRequestException('Fournisseur non trouvé.');
+    }
+    
      const creat = await this.categorieModel.create(dto);
      return creat;
   
@@ -29,13 +35,21 @@ async create(dto: createCategorieDto): Promise<Categorie> {
 
   async findAllByCategorie(
       dto: PaginationResponseDto,
+      fournisseurId: string,
     ): Promise<PaginationService<Categorie>>{
       const { search, page, limit, dateCreationDebut, dateCreationFin } = dto;
       const query: any = {};
+
+      if (!fournisseurId) {
+          throw new NotFoundException('ID de fournisseur manquant');
+        }
   
       const Page = page ? parseInt(String(page), 10) : 1;
       const Limit = limit ? parseInt(String(limit), 10) : 10;
   
+      // Ajouter le filtre par fournisseurId
+      query.fournisseurId = fournisseurId;
+
       if (search) {
         query.designation = { $regex: search, $options: 'i' };
       }
@@ -54,13 +68,13 @@ async create(dto: createCategorieDto): Promise<Categorie> {
       return new PaginationService<Categorie>(data, Page, Limit, total);
     } 
   
-    async findById(id: string): Promise<Categorie> {
-      const foursseurId = await this.categorieModel.findById(id);
-      if (!foursseurId) {
-        throw new BadRequestException('Categorie non trouvé.');
-      }
-      return foursseurId;
+   async findOne(id: string): Promise<Categorie> {
+    const categorie = await this.categorieModel.findById(id).exec();
+    if (!categorie) {
+      throw new NotFoundException('Categorie non trouvé');
     }
+    return categorie;
+  }
   
     async countDocuments(): Promise<number> {
       return this.categorieModel.countDocuments();

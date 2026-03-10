@@ -15,6 +15,9 @@ export class GetAllCategorieHandler implements IQueryHandler<GetAllCategorieQuer
   ) {}
 
   async execute(query: GetAllCategorieQuery): Promise<PaginationService<Categorie>> {
-      return await this.CategorieRepository.findAllByCategorie(query);
+      if (!query.fournisseurId) {
+        throw new Error('fournisseurId is required');
+      }
+      return await this.CategorieRepository.findAllByCategorie(query, query.fournisseurId);
     }
 }

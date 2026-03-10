@@ -1,10 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export type CategorieDocument = Categorie & Document;
 
 @Schema()
 export class Categorie {
+
+    @Prop({ type: Types.ObjectId, ref: 'fournisseur', required: true })
+    fournisseurId: Types.ObjectId;
+    
     @Prop({ required: true })
     nom: string;
 
