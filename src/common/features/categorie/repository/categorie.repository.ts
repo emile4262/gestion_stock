@@ -40,15 +40,14 @@ async create(dto: createCategorieDto): Promise<Categorie> {
       const { search, page, limit, dateCreationDebut, dateCreationFin } = dto;
       const query: any = {};
 
-      if (!fournisseurId) {
-          throw new NotFoundException('ID de fournisseur manquant');
-        }
+      if (fournisseurId) {
+      query.fournisseurId = fournisseurId;
+    }
   
       const Page = page ? parseInt(String(page), 10) : 1;
       const Limit = limit ? parseInt(String(limit), 10) : 10;
   
-      // Ajouter le filtre par fournisseurId
-      query.fournisseurId = fournisseurId;
+      
 
       if (search) {
         query.designation = { $regex: search, $options: 'i' };
@@ -61,6 +60,7 @@ async create(dto: createCategorieDto): Promise<Categorie> {
         .find(query)
         .sort({ createdAt: 'desc', _id: 'desc' })
         .skip((Page - 1) * Limit)
+        .populate('fournisseurId')
         .limit(Limit)
         .exec();
               

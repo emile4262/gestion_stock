@@ -19,11 +19,13 @@ export class FournisseurController {
     @Inject('IFournisseurRepository') private readonly fournisseurRepository: FournisseurRepository,
   ) {}
 
+
   @Post('create')
   @ApiProperty({ description: 'Créer un nouveau fournisseur' })
   create(@Body() dto: createFournisseurDto) {
     return this.commandBus.execute(new CreateFournisseurCommand(dto));
   }
+
 
   @Get('fournisseurs')
   @ApiProperty({ description: 'Récupérer tous les fournisseurs' })
@@ -37,19 +39,19 @@ export class FournisseurController {
       ));
   }
 
-   @Get(':fournisseurId')
+   @Get('id')
     @ApiProperty({description: 'Récupérer une fournisseur spécifique'})
-    findOne(@Param('fournisseurId') id: string){
-      console.log('ID fournisseur reçu:', id); // Debug
+    findOne(@Param('ournisseurId') id: string){
       return this.queryBus.execute(new GetOneFournisseurQuery(
+
           id
       ))
     }
 
-  @Put(':fournisseurId')
+  @Put('id')
   @ApiProperty({ description: 'modifier tous fournisseur'})
    async update(
-    @Param('fournisseurId') id: string,
+    @Param('id') id: string,
     @Body() data: UpdateFournisseurDto,
   ) {
     const result = await this.commandBus.execute(
@@ -62,10 +64,11 @@ export class FournisseurController {
     };
   }
 
-  @Delete(':fournisseurId')
+
+  @Delete(':id')
   @ApiProperty({ description: 'supprimer tous fournisseur'})
   async delete(
-    @Param('fournisseurId') id: string,
+    @Param('id') id: string,
   ) {
     const result = await this.commandBus.execute(
       new DeleteFournisseurCommand(id),
@@ -76,6 +79,5 @@ export class FournisseurController {
       data: result,
     };
   }
-
 
 }

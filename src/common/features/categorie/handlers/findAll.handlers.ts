@@ -4,7 +4,7 @@ import { PaginationService } from '../../../pagination/pagination';
 import { Categorie } from 'src/common/schemas/categorie';
 import { GetAllCategorieQuery } from '../queries/getAll.query';
 import { categorieRepository } from '../repository/categorie.repository';
-
+import { PaginationResponseDto } from '../dto/paginationResponse.dto';
 
 @QueryHandler(GetAllCategorieQuery) 
 export class GetAllCategorieHandler implements IQueryHandler<GetAllCategorieQuery>
@@ -18,6 +18,15 @@ export class GetAllCategorieHandler implements IQueryHandler<GetAllCategorieQuer
       if (!query.fournisseurId) {
         throw new Error('fournisseurId is required');
       }
-      return await this.CategorieRepository.findAllByCategorie(query, query.fournisseurId);
+      
+      const paginationDto: PaginationResponseDto = {
+        page: query.page,
+        limit: query.limit,
+        search: query.search,
+        dateCreationDebut: query.dateCreationDebut,
+        dateCreationFin: query.dateCreationFin
+      };
+      
+      return await this.CategorieRepository.findAllByCategorie(paginationDto, query.fournisseurId);
     }
 }

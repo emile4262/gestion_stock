@@ -16,7 +16,5 @@ export class CreateCategorieHandler implements ICommandHandler<CreateCategorieCo
     return this.CategorieRepository.create(command.dto);
   }
 
- async count(): Promise<number> {
-    return this.CategorieRepository.countDocuments();
-  }  
+  
 }

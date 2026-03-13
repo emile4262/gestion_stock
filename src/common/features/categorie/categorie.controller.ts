@@ -22,28 +22,33 @@ export class CategorieController {
   @Post('create')
   @ApiProperty({ description: 'Créer un nouveau Categorie' })
   create(@Body() dto: createCategorieDto) {
+    console.log('DTO de création reçu:', dto); // Debug
     return this.commandBus.execute(new CreateCategorieCommand(dto));
   }
 
-  @Get('Categories')
+  @Get('fournisseurId')
   @ApiProperty({ description: 'Récupérer tous les Categories' })
-  getAll(@Query()
-   dto: PaginationResponseDto,
-   @Query('fournisseurId') fournisseurId: string,
-  ) {
-      return this.queryBus.execute(new GetAllCategorieQuery(
-        dto.page,
-        dto.limit,
-        fournisseurId,
-        dto.dateCreationDebut,
-        dto.dateCreationFin,
-        dto.search
-      ));
+  getAll(@Query() dto: PaginationResponseDto ,
+  @Query('fournisseurId') fournisseurId: string 
+) {
+    if (!fournisseurId) {
+      throw new Error('fournisseurId is required in query parameters');
+    }
+    
+    return this.queryBus.execute(new GetAllCategorieQuery(
+      dto.page,
+      dto.limit,
+      fournisseurId,
+      dto.dateCreationDebut,
+      dto.dateCreationFin,
+      dto.search
+    ));
   }
 
   @Get(':categorieId')
   @ApiProperty({description: 'Récupérer une catégorie spécifique'})
   findOne(@Param('categorieId') id: string){
+    console.log('ID de catégorie reçu:', id); // Debug
     return this.queryBus.execute(new GetOneCategorieQuery(
         id
     ))

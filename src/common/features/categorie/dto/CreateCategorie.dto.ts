@@ -12,6 +12,5 @@ export class createCategorieDto {
     description: 'L\'ID du fournisseur',
     required: true
    }) 
-  @IsString()
   fournisseurId: string;
 }
